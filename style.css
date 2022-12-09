@@ -1,0 +1,39 @@
+/* Create CSS variables at the root of the document to be used throughout the style sheet */
+
+
+header {
+
+    padding: 50px;
+    text-align: center;
+    /* Refer to CSS values by the name of the custom property we assigned it */
+    background-color: white;
+    color: red;
+}
+
+
+body {
+    background-color: green;
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 0px;
+    color: black;
+}
+
+h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1cm;
+    color: red;
+}
+
+a {
+    background-color: red;
+    color: green;
+    border-radius: 5px;
+
+}
