@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="/Users/aaronjordan/Desktop/Challenge4/style.css">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
+    <link href="style.css" rel="stylesheet">
+    <title>CODE QUIZ</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
 
-<body>
     <header>
         <h1>&#128223; CODE QUIZ! &#9203;</h1>
         <h2 id="count">60</h2>
-        <div>
-            <a>
-                <button onclick="startQuiz()">Click To Begin</button>
-            </a>
+        <button onclick="startQuiz()" id="begin-btn" class="begin-btn btn">Begin</button>
     </header>
 
+<body>
     <div class="container">
-        <h1 id="question-prompt"></h1>
-        <div id="prompt-holder"></div>
-        <div id="choice-holder"></div>
+        <div id="question-container" class="hide">
+            <div id="question">QUESTION</div>
+            <div id="choices" class="btn">
+                <button class="btn">ANS1</button>
+                <button class="btn">ANS2</button>
+                <button class="btn">ANS3</button>
+            </div>
+            <div class="controls">
+                <button id="submit-btn" class="submit-btn btn">Submit</button>
+            </div>
+        </div>
     </div>
-
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-    <script src="script.js">
-    </script>
-
+    <main>
+    </main>
 </body>
+<script src="script.js"></script>
 
 </html>
