@@ -1,107 +1,110 @@
 const beginButton = document.getElementById('begin-btn');
 const submitbtn = document.getElementById('submit-btn');
 let questionContainerElement = document.getElementById('question-container');
-let shuffledQuestions, currentQuestionIndex
+let shuffledQuestions;
 const questionElement = document.getElementById('question');
 const choicesButtonElement = document.getElementById('choices');
-beginButton.addEventListener('click', startQuiz);
-submitbtn.addEventListener('click', () => {
-    currentQuestionIndex++
-
-    setNextQuestion()
-})
+var score = 100;
+var counter = 100; // 
+let currentQuestionIndex = 0;
+// const scoreInput = document.querySelector;
+const counterContainer = document.getElementById('count');
 
 
 function startQuiz() {
-    var counter = 60;
-    setInterval(function () {
-        counter--;
-        if (counter >= 0) {
-            id = document.getElementById("count");
-            id.innerHTML = counter;
-            if (counter == 0) {
-                document.getElementById("count").innerHTML = "GameOver!&#128553;";
-            }
-        }
-    }, 1000);
+    // start the counter
+    startCounter();
+
     beginButton.classList.add('hide')
-    shuffledQuestions = question.sort(() => Math.random() - .5);
-    currentQuestionIndex = 0;
-    questionContainerElement.classList.remove('hide')
-    setNextQuestion()
+
+    shuffledQuestions = questionsArray.sort(() => Math.random() - .5);
+
+    questionContainerElement.classList.remove('hide');
+
+    quizReset();
+
+    showNextQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
-
-
-function setNextQuestion() {
-    quizReset()
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
-}
-
-function showQuestion(question) {
-
+function showNextQuestion(question) {
     questionElement.innerText = question.question;
-    question.choices.forEach(choices => {
+    question.choices.forEach(choice => {
         const button = document.createElement('button');
-        button.innerText = choices.text;
+        button.innerText = choice.text;
         button.classList.add('btn');
-        if (choices.correct) {
-            button.dataset.correct = choices.correct
+        if (choice.correct) {
+            button.dataset.correct = choice.correct
         }
         button.addEventListener('click', submitAnswer);
         choicesButtonElement.appendChild(button);
     });
+}
 
-
+function startCounter() {
+    const theIntervalId = setInterval(function () {
+        console.log(('counter is', counter));
+        counter--;
+        counterContainer.innerText = counter;
+        if (counter <= 0) {
+            clearInterval(theIntervalId);
+            counterContainer.innerHTML = "TimeUp!&#128553;";
+            questionContainerElement.classList.add('hide');
+        }
+    }, 1000);
 }
 
 function quizReset() {
 
-    /* submitbtn.classList.add('hide'); */
     while (choicesButtonElement.firstChild) {
         choicesButtonElement.removeChild(choicesButtonElement.firstChild);
     }
-
 }
 
 function submitAnswer(e) {
-
+    // after an answer is selected, increment the question index
+    currentQuestionIndex++
+    // store a reference to the clicked button element in a const
     const chosenAnswer = e.target
-    const correct = chosenAnswer.dataset.correct
-    answerStatus(document.body, correct);
-    Array.from(choicesButtonElement.children).forEach(button => {
-        chosenAnswer(button, button.dataset.correct);
-    })
-    if (shuffledQuestions.length > currentQuestionIndex + 1);
+    // if the dataset correct does not exist, user chose wrong so subtract from score
+    if (!chosenAnswer.dataset.correct) {
+        counter = counter - 5;
+        score = score - 20;
+        console.log(`User score is now ${score}`);
+        scoreCard.innerHTML = ('Your score is now' + score);
+        const scoreInput = document.querySelector('.storage');
+        const text = document.querySelector('.text');
+        const saveButton = document.querySelector('.button');
+        scoreInput.addEventListener('input', letter => {
+            text.textContent = letter.target.value
 
+        })
+        const userSave = () => {
+            localStorage.setItem('textinput', text.textContent, scoreCard.innerHTML);
+            saveButton.addEventListener('click', userSave);
+        }
 
-}
-
-function answerStatus(element, correct) {
-
-    if (correct) {
-        correct();
     }
-    else {
-        incorrect();
-    }
+
+
+
+    quizReset();
+    // on to the next question regardless of right or wrong choice
+    showNextQuestion(shuffledQuestions[currentQuestionIndex]);
+
+
+
+
 }
 
 
-function incorrect() {
-
-
-}
 
 function correct() {
 
+    score = score + 20;
 
 }
 
-
-
-const question = [
-
+const questionsArray = [
     {
         question: 'Which example displays proper camel case?',
         choices: [
@@ -147,3 +150,13 @@ const question = [
         ]
     }
 ]
+
+beginButton.addEventListener('click', startQuiz);
+
+submitbtn.addEventListener('click', () => {
+    currentQuestionIndex++
+
+    showNextQuestion()
+})
+
+

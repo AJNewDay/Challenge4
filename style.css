@@ -55,3 +55,8 @@ body {
 .hide {
     display: none;
 }
+
+.score {
+
+    font-size: 60px;
+}
